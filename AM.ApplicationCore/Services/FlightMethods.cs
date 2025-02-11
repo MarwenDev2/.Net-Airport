@@ -28,6 +28,10 @@ namespace AM.ApplicationCore.Services
             var req = from flight in Flights
                       where flight.Destination == destination
                       select flight.FlightDate;
+
+            //expression Lamda :
+            var lamdareq = Flights.Where(f=> f.Destination == destination).Select(f => f.FlightDate);
+
             return req.ToList();
         }
 
@@ -67,6 +71,7 @@ namespace AM.ApplicationCore.Services
 
             }
             return flights;
+
         }
 
         public void ShowFlightDetails(Plane plane)
@@ -75,8 +80,7 @@ namespace AM.ApplicationCore.Services
                       where flight.Plane.Equals(plane)
                       select flight;
             foreach (var flight in req)
-                Console.WriteLine("\nDestination : "+flight.Destination +
-                    " and flight Date : " +flight.FlightDate);
+                Console.WriteLine("\nDestination : "+flight.Destination + " and flight Date : " +flight.FlightDate);
         }
 
         public int ProgrammedFlightNumber(DateTime startDate)
@@ -88,8 +92,10 @@ namespace AM.ApplicationCore.Services
                       select flight;
             //foreach (var flight in req)
             //        nb++;
-
             return req.Count();
+
+            //expression Lamda :
+            Flights.Count(f => f.FlightDate.Date > startDate.Date && f.FlightDate.Date < startDate.Date.AddDays(7));
         }
 
         public float DurationAverage(string destination)
@@ -98,6 +104,12 @@ namespace AM.ApplicationCore.Services
                       where flight.Destination == destination
                       select flight.EstimatedDuration;
             return req.Average();
+
+
+            //expression Lamda :
+            Flights.Where(f => f.Destination == destination)
+                   .Select(f => f.EstimatedDuration)
+                   .Average();
         }
 
         public List<Flight> OrderedDurationFlights()
@@ -106,6 +118,10 @@ namespace AM.ApplicationCore.Services
                       orderby flight.EstimatedDuration descending
                       select flight;
             return req.ToList();
+
+
+            //expression Lamda :
+            Flights.OrderByDescending(f => f.EstimatedDuration).ToList();
         }
 
         public List<Traveller> SeniorTravellers(Flight flight)
@@ -114,6 +130,12 @@ namespace AM.ApplicationCore.Services
                       orderby p.BirthDate
                       select p;
             return req.Take(3 ).ToList();
+
+            //expression Lamda :
+            flight.Passengers.OfType<Traveller>()
+                             .OrderBy(p => p.BirthDate)
+                             .Take(3)
+                             .ToList();
         }
 
         public void DestinationGroupedFlights()
@@ -126,6 +148,15 @@ namespace AM.ApplicationCore.Services
                 foreach (var f in g)
                     Console.WriteLine("\n Décollage : " + f.FlightDate);
             }
+
+            //expression Lamda :
+            Flights.GroupBy(f => f.Destination)
+                   .ToList()
+                   .ForEach(g =>
+                   {
+                       Console.WriteLine($"\nDestination: {g.Key}");
+                       g.ToList().ForEach(f => Console.WriteLine($"\nDécollage: {f.FlightDate}"));
+                   });
         }
     }
 }
