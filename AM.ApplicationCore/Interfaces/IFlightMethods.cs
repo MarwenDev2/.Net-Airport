@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AM.ApplicationCore.Interfaces
 {
-    internal interface IFlightMethods
+    public interface IFlightMethods
     {
         List<DateTime> GetFlightDates(string destination);
 

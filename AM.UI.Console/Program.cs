@@ -16,8 +16,8 @@ Passenger p1 = new Passenger
 {
     BirthDate = new DateTime(2001, 2, 26),
     EmailAddress = "marwenfeki214@gmail.com",
-    FirstName = "Marwen",
-    LastName = "Feki",
+    FirstName = "marwen",
+    LastName = "feki",
     PasseportNumber = "0192393",
     TelNumber = "52423987"
 };
@@ -83,3 +83,8 @@ foreach(var i in fm.SeniorTravellers(TestData.flight1))
 
 fm.DestinationGroupedFlights();
 
+Console.WriteLine("Before : " + p1.ToString());
+
+p1.UpperFullName();
+
+Console.WriteLine("Later : " + p1.ToString());
