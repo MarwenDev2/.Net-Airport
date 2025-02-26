@@ -1,5 +1,6 @@
 ﻿using AM.ApplicationCore.Domain;
 using AM.ApplicationCore.Services;
+using AM.Infrastructure;
 
 Plane plane = new Plane(300,DateTime.Now,PlaneType.Boeing);
 plane.PlaneId = 1;
@@ -88,3 +89,7 @@ Console.WriteLine("Before : " + p1.ToString());
 p1.UpperFullName();
 
 Console.WriteLine("Later : " + p1.ToString());
+
+AMContext context =  new AMContext();
+context.Flights.Add(TestData.flight2);
+context.SaveChanges();

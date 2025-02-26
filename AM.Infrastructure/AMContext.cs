@@ -1,4 +1,5 @@
 ﻿using AM.ApplicationCore.Domain;
+using AM.Infrastructure.Configurations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,11 @@ namespace AM.Infrastructure
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\mssqllocaldb;
             Initial Catalog=MarwenFekiDB;Integrated Security=true");
             base.OnConfiguring(optionsBuilder);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new PlaneConfiguration());
         }
 
         public DbSet<Flight> Flights { get; set; }
