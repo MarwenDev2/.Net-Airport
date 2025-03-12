@@ -19,8 +19,8 @@ namespace AM.ApplicationCore.Domain
         public int FlightId { get; set; }
         public int PlaneId { get; set; }
         [ForeignKey("PlaneId")]
-        public Plane Plane { get; set; }
-        public ICollection<Passenger> Passengers { get; set; }
+        public virtual Plane Plane { get; set; }
+        public virtual ICollection<Ticket> Tickets { get; set; }
 
         public override string? ToString()
         {

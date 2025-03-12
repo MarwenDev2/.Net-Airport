@@ -108,9 +108,9 @@ foreach (var flight in fm.OrderedDurationFlights())
 }
 
 // Display the 3 oldest travellers on a specific flight
-Console.WriteLine("\nTop 3 Senior Travellers:");
-foreach (var traveller in fm.SeniorTravellers(TestData.flight1))
-    Console.WriteLine(traveller.ToString());
+//Console.WriteLine("\nTop 3 Senior Travellers:");
+//foreach (var traveller in fm.SeniorTravellers(TestData.flight1))
+//    Console.WriteLine(traveller.ToString());
 
 // Group flights by destination
 fm.DestinationGroupedFlights();
@@ -125,9 +125,10 @@ p1.FullName.LastName = p1.FullName.LastName.ToUpper();
 Console.WriteLine("\nAprès la transformation : " + p1.ToString());
 
 // Save a flight to the database using AMContext
-using (AMContext context = new AMContext())
-{
-    context.Flights.Add(TestData.flight2);
-    context.SaveChanges();
-    Console.WriteLine("\nFlight saved successfully to the database.");
-}
+AMContext context = new AMContext();
+
+//context.Flights.Add(TestData.flight2);
+//context.SaveChanges();
+Console.WriteLine("\nFlight saved successfully to the database.");
+
+Console.WriteLine("\nPlane Capacity: {context.Flights.First().Plane.Capacity}");

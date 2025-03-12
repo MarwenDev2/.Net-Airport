@@ -124,19 +124,19 @@ namespace AM.ApplicationCore.Services
             Flights.OrderByDescending(f => f.EstimatedDuration).ToList();
         }
 
-        public List<Traveller> SeniorTravellers(Flight flight)
-        {
-            var req = from p in flight.Passengers.OfType<Traveller>()
-                      orderby p.BirthDate
-                      select p;
-            return req.Take(3 ).ToList();
+        //public List<Traveller> SeniorTravellers(Flight flight)
+        //{
+        //    var req = from p in flight.Passengers.OfType<Traveller>()
+        //              orderby p.BirthDate
+        //              select p;
+        //    return req.Take(3 ).ToList();
 
-            //expression Lamda :
-            flight.Passengers.OfType<Traveller>()
-                             .OrderBy(p => p.BirthDate)
-                             .Take(3)
-                             .ToList();
-        }
+        //    //expression Lamda :
+        //    flight.Passengers.OfType<Traveller>()
+        //                     .OrderBy(p => p.BirthDate)
+        //                     .Take(3)
+        //                     .ToList();
+        //}
 
         public void DestinationGroupedFlights()
         {

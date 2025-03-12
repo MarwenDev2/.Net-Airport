@@ -22,9 +22,9 @@ namespace AM.Infrastructure.Configurations
                    .OnDelete(DeleteBehavior.Cascade);
 
             // Many-to-Many with Passenger
-            builder.HasMany(f => f.Passengers)
-                   .WithMany(p => p.Flights)
-                   .UsingEntity(j => j.ToTable("PassengerFlights"));
+            //builder.HasMany(f => f.Passengers)
+            //       .WithMany(p => p.Flights)
+            //       .UsingEntity(j => j.ToTable("PassengerFlights"));
 
             builder.ToTable("Flights");
         }

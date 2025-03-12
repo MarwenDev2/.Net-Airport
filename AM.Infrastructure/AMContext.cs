@@ -13,8 +13,8 @@ namespace AM.Infrastructure
     {   
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\mssqllocaldb;
-            Initial Catalog=MarwenFekiDB;Integrated Security=true");
+            optionsBuilder.UseLazyLoadingProxies()
+                 .UseSqlServer(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=MarwenFekiDB;Integrated Security=true");
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -23,6 +23,9 @@ namespace AM.Infrastructure
             modelBuilder.ApplyConfiguration(new PlaneConfiguration());
             modelBuilder.ApplyConfiguration(new FlightConfiguration());
             modelBuilder.ApplyConfiguration(new PassengerConfiguration());
+            modelBuilder.ApplyConfiguration(new TicketConfiguration());
+            modelBuilder.Entity<Traveller>().ToTable("Travellers");
+            modelBuilder.Entity<Staff>().ToTable("Staffs");
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)

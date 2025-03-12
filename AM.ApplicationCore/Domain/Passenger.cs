@@ -22,7 +22,7 @@ namespace AM.ApplicationCore.Domain
         public string PasseportNumber { get; set; }
         [RegularExpression(@"^[0-9]{8}$")]
         public string TelNumber { get; set; }
-        public ICollection<Flight> Flights { get; set; }
+        public virtual ICollection<Ticket> Tickets { get; set; }
 
         public bool CheckProfile(string firstName, string lastName, string email)
         {
