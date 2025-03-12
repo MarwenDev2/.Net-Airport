@@ -21,7 +21,19 @@ namespace AM.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new PlaneConfiguration());
+            modelBuilder.ApplyConfiguration(new FlightConfiguration());
+            modelBuilder.ApplyConfiguration(new PassengerConfiguration());
         }
+
+        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        {
+            base.ConfigureConventions(configurationBuilder);
+
+            // Set DateTime properties to 'date' in SQL Server
+            configurationBuilder.Properties<DateTime>()
+                .HaveColumnType("date");
+        }
+
 
         public DbSet<Flight> Flights { get; set; }
 
