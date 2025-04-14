@@ -131,4 +131,4 @@ AMContext context = new AMContext();
 //context.SaveChanges();
 Console.WriteLine("\nFlight saved successfully to the database.");
 
-Console.WriteLine("\nPlane Capacity: {context.Flights.First().Plane.Capacity}");
+Console.WriteLine("\nPlane Capacity:"+ context.Flights.First().Plane.Capacity);
