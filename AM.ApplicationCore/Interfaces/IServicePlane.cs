@@ -12,5 +12,9 @@ namespace AM.ApplicationCore.Interfaces
         IList<Traveller> GetTravellers(Plane plane);
 
         IList<Flight> GetFlights(int n);
+
+        bool AvailablePlanes(int n,Flight flight);
+
+        void DeleteOldPlanes();
     }
 }

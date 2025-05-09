@@ -33,5 +33,24 @@ namespace AM.ApplicationCore.Services
                 SelectMany(p=>p.Flights)
                 .ToList();
         }
+
+        public bool AvailablePlanes(int n, Flight flight)
+        {
+            return GetAll()
+                .Where(p => p.Flights.Count() < n)
+                .Any(p => p.Flights
+                    .Any(f => f.Departure == flight.Departure && f.Destination == flight.Destination));
+        }
+
+        public void DeleteOldPlanes()
+        {
+            var oldPlanes = GetMany(p=> DateTime.Now.Year - p.ManufactureDate.Year > 10);
+
+            foreach (var plane in oldPlanes)
+            {
+                Delete(plane);
+                Commit();
+            }
+        }
     }
 }
